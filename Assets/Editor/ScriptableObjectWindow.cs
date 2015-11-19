@@ -21,11 +21,11 @@ internal class EndNameEdit : EndNameEditAction
 public class ScriptableObjectWindow : EditorWindow
 {
 	private int selectedIndex;
-	private string[] names;
+	private static string[] names;
 	
-	private Type[] types;
+	private static Type[] types;
 	
-	public Type[] Types
+	private static Type[] Types
 	{ 
 		get { return types; }
 		set
@@ -34,7 +34,15 @@ public class ScriptableObjectWindow : EditorWindow
 			names = types.Select(t => t.FullName).ToArray();
 		}
 	}
-	
+
+	public static void Init(Type[] scriptableObjects)
+	{
+		Types = scriptableObjects;
+
+		var window = EditorWindow.GetWindow<ScriptableObjectWindow>(true, "Create a new ScriptableObject", true);
+		window.ShowPopup();
+	}
+
 	public void OnGUI()
 	{
 		GUILayout.Label("ScriptableObject Class");

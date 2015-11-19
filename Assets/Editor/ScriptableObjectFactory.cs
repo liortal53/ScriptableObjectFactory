@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
 /// <summary>
-/// Helper class for instantiating ScriptableObjects.
+/// A helper class for instantiating ScriptableObjects in the editor.
 /// </summary>
 public class ScriptableObjectFactory
 {
-	[MenuItem("Project/Create/ScriptableObject")]
 	[MenuItem("Assets/Create/ScriptableObject")]
-	public static void Create()
+	public static void CreateScriptableObject()
 	{
 		var assembly = GetAssembly ();
 
@@ -22,10 +20,7 @@ public class ScriptableObjectFactory
 		                            select t).ToArray();
 
 		// Show the selection window.
-		var window = EditorWindow.GetWindow<ScriptableObjectWindow>(true, "Create a new ScriptableObject", true);
-		window.ShowPopup();
-
-		window.Types = allScriptableObjects;
+		ScriptableObjectWindow.Init(allScriptableObjects);
 	}
 
 	/// <summary>

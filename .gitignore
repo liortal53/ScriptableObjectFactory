@@ -1,5 +1,5 @@
 /Library
-
+obj/
 /Temp
 *.csproj
 *.sln
